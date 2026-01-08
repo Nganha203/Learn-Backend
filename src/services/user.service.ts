@@ -3,13 +3,20 @@ import { PrismaClient, Prisma } from '@prisma/client'
 import { prisma } from "config/client";
 import { name } from "ejs";
 
-const handlePostUser = async (username: string, email: string, address: string) => {
+const handlePostUser = async (
+    username: string,
+    email: string,
+    password: string,
+    role: string,
+    address: string) => {
 
     const user = await prisma.user.create({
         data: {
-            name: username,
-            email: email,
-            address: address
+            fullName: username,
+            username: email,
+            address: address,
+            password: password,
+            accountType: role
         },
     })
     return user
@@ -42,11 +49,24 @@ const postUpdateUserService = async (id: string, name: string, email: string, ad
             id: +id
         },
         data: {
-            name: name,
-            email: email,
-            address: address
+            fullName: name,
+            username: email,
+            address: address,
+            password: '',
+            accountType: ''
         },
     })
 }
+const getRoleUser = async () => {
+    const roles = await prisma.role.findMany()
+    return roles
+}
 
-export { handlePostUser, getAllUsers, handleDeleteUser, getDetailUsersService, postUpdateUserService }
+export {
+    handlePostUser,
+    getAllUsers,
+    handleDeleteUser,
+    getDetailUsersService,
+    postUpdateUserService,
+    getRoleUser
+}

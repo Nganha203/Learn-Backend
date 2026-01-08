@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
+    <meta name="author" content="Hỏi Dân IT" />
+    <title>Manage user - Admin Ngan Ha</title>
+    <link href="/admin/css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="sb-nav-fixed">
+    <%- include('../layout/header'); -%>
+        <div id="layoutSidenav">
+            <%- include('../layout/sidenav'); -%>
+                <div id="layoutSidenav_content">
+                    <main>
+                        <div class="container-fluid px-4">
+                            <h1 class="mt-4">Manage Users</h1>
+                            <ol class="breadcrumb mb-4">
+                                <li class="breadcrumb-item">
+                                    <a href="/admin">Dashboard</a>
+                                </li>
+                                <li class="breadcrumb-item active">
+                                    List users
+                                </li>
+                            </ol>
+                            <div>
+                                <div class="d-flex justify-content-between align-items-center pb-5">
+                                    <div>
+                                        <h4>
+                                            List of users
+                                        </h4>
+                                    </div>
+                                    <div>
+                                        <a class="btn btn-success" href="/admin/create-user">Create a new user</a>
+                                    </div>
+
+                                </div>
+                                <table class="table table-bordered border-primary table-hover text-center align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Address</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% users.forEach(function(result){ %>
+                                            <tr>
+                                                <th scope="row">
+                                                    <%= result.id %>
+                                                </th>
+                                                <td>
+                                                    <%= result.name %>
+                                                </td>
+                                                <td>
+                                                    <%= result.username %>
+                                                </td>
+                                                <td>
+                                                    <%= result.address %>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex gap-2 justify-content-center">
+                                                        <form action="handle-view-user/<%= result.id %>" method="get">
+                                                            <button type="submit" class="btn btn-primary">View</button>
+                                                        </form>
+                                                        <form action="handle-delete-user/<%= result.id %>"
+                                                            method="post">
+                                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                                        </form>
+
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                            <% }); %>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </main>
+                    <footer class="py-4 bg-light mt-auto">
+                        <div class="container-fluid px-4">
+                            <div class="d-flex align-items-center justify-content-between small">
+                                <div class="text-muted">Copyright &copy; Nguyen Ngoc Ngan Ha 2024</div>
+                                <div>
+                                    <a href="#" target="_blank">Website</a>
+                                    &middot;
+                                    <a href="#" target="_blank">Youtube channel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            crossorigin="anonymous"></script>
+        <script src="/admin/js/scripts.js"></script>
+
+</body>
+
+</html>

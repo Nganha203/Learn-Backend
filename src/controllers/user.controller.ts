@@ -5,14 +5,6 @@ const getHomePageController = async (req: Request, res: Response) => {
     const users = await getAllUsers()
     return res.render('home', { results: users })
 }
-const getCreateUserController = (req: Request, res: Response) => {
-    return res.render('create-user')
-}
-const postCreateUserController = (req: Request, res: Response) => {
-    const { username, email, address } = req.body
-    const a = handlePostUser(username, email, address)
-    return res.redirect('/')
-}
 const postDeleteUserController = async (req: Request, res: Response) => {
     const { id } = req.params
     await handleDeleteUser(id)
@@ -32,8 +24,6 @@ const updateUserController = async (req: Request, res: Response) => {
 
 export {
     getHomePageController,
-    getCreateUserController,
-    postCreateUserController,
     postDeleteUserController,
     getDetailUserController,
     updateUserController
